@@ -370,7 +370,55 @@ enum class CommandBits : uint16_t
 };
 } // namespace Actions
 
-namespace BasicInformation {} // namespace BasicInformation
+namespace BasicInformation {
+
+// Enum for ColorEnum
+enum class ColorEnum : uint8_t
+{
+    kBlack   = 0x00,
+    kNavy    = 0x01,
+    kGreen   = 0x02,
+    kTeal    = 0x03,
+    kMaroon  = 0x04,
+    kPurple  = 0x05,
+    kOlive   = 0x06,
+    kGray    = 0x07,
+    kBlue    = 0x08,
+    kLime    = 0x09,
+    kAqua    = 0x0A,
+    kRed     = 0x0B,
+    kFuchsia = 0x0C,
+    kYellow  = 0x0D,
+    kWhite   = 0x0E,
+    kNickel  = 0x0F,
+    kChrome  = 0x10,
+    kBrass   = 0x11,
+    kCopper  = 0x12,
+    kSilver  = 0x13,
+    kGold    = 0x14,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 21,
+};
+
+// Enum for ProductFinishEnum
+enum class ProductFinishEnum : uint8_t
+{
+    kOther    = 0x00,
+    kMatte    = 0x01,
+    kSatin    = 0x02,
+    kPolished = 0x03,
+    kRugged   = 0x04,
+    kFabric   = 0x05,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 6,
+};
+} // namespace BasicInformation
 
 namespace OtaSoftwareUpdateProvider {
 
@@ -1223,6 +1271,17 @@ enum class GranularityEnum : uint8_t
     kUnknownEnumValue = 5,
 };
 
+// Enum for StatusCode
+enum class StatusCode : uint8_t
+{
+    kTimeNotAccepted = 0x02,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 0,
+};
+
 // Enum for TimeSourceEnum
 enum class TimeSourceEnum : uint8_t
 {
@@ -1230,16 +1289,16 @@ enum class TimeSourceEnum : uint8_t
     kUnknown          = 0x01,
     kAdmin            = 0x02,
     kNodeTimeCluster  = 0x03,
-    kNonFabricSntp    = 0x04,
-    kNonFabricNtp     = 0x05,
-    kFabricSntp       = 0x06,
-    kFabricNtp        = 0x07,
-    kMixedNtp         = 0x08,
-    kNonFabricSntpNts = 0x09,
-    kNonFabricNtpNts  = 0x0A,
-    kFabricSntpNts    = 0x0B,
-    kFabricNtpNts     = 0x0C,
-    kMixedNtpNts      = 0x0D,
+    kNonMatterSNTP    = 0x04,
+    kNonMatterNTP     = 0x05,
+    kMatterSNTP       = 0x06,
+    kMatterNTP        = 0x07,
+    kMixedNTP         = 0x08,
+    kNonMatterSNTPNTS = 0x09,
+    kNonMatterNTPNTS  = 0x0A,
+    kMatterSNTPNTS    = 0x0B,
+    kMatterNTPNTS     = 0x0C,
+    kMixedNTPNTS      = 0x0D,
     kCloudSource      = 0x0E,
     kPtp              = 0x0F,
     kGnss             = 0x10,
@@ -1249,9 +1308,79 @@ enum class TimeSourceEnum : uint8_t
     // enum value. This specific should never be transmitted.
     kUnknownEnumValue = 17,
 };
+
+// Enum for TimeZoneDatabaseEnum
+enum class TimeZoneDatabaseEnum : uint8_t
+{
+    kFull    = 0x00,
+    kPartial = 0x01,
+    kNone    = 0x02,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 3,
+};
+
+// Bitmap for TimeSynchronizationFeature
+enum class TimeSynchronizationFeature : uint32_t
+{
+    kTimeZone       = 0x1,
+    kNTPClient      = 0x2,
+    kNTPServer      = 0x4,
+    kTimeSyncClient = 0x8,
+};
 } // namespace TimeSynchronization
 
-namespace BridgedDeviceBasicInformation {} // namespace BridgedDeviceBasicInformation
+namespace BridgedDeviceBasicInformation {
+
+// Enum for ColorEnum
+enum class ColorEnum : uint8_t
+{
+    kBlack   = 0x00,
+    kNavy    = 0x01,
+    kGreen   = 0x02,
+    kTeal    = 0x03,
+    kMaroon  = 0x04,
+    kPurple  = 0x05,
+    kOlive   = 0x06,
+    kGray    = 0x07,
+    kBlue    = 0x08,
+    kLime    = 0x09,
+    kAqua    = 0x0A,
+    kRed     = 0x0B,
+    kFuchsia = 0x0C,
+    kYellow  = 0x0D,
+    kWhite   = 0x0E,
+    kNickel  = 0x0F,
+    kChrome  = 0x10,
+    kBrass   = 0x11,
+    kCopper  = 0x12,
+    kSilver  = 0x13,
+    kGold    = 0x14,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 21,
+};
+
+// Enum for ProductFinishEnum
+enum class ProductFinishEnum : uint8_t
+{
+    kOther    = 0x00,
+    kMatte    = 0x01,
+    kSatin    = 0x02,
+    kPolished = 0x03,
+    kRugged   = 0x04,
+    kFabric   = 0x05,
+    // All received enum values that are not listed above will be mapped
+    // to kUnknownEnumValue. This is a helper enum value that should only
+    // be used by code to process how it handles receiving and unknown
+    // enum value. This specific should never be transmitted.
+    kUnknownEnumValue = 6,
+};
+} // namespace BridgedDeviceBasicInformation
 
 namespace Switch {
 

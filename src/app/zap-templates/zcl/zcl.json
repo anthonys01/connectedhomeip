@@ -137,8 +137,10 @@
             "ProductLabel",
             "SerialNumber",
             "UniqueID",
-            "CapabilityMinima"
+            "CapabilityMinima",
+            "ProductAppearance"
         ],
+        "Bridged Device Basic Information": ["ProductAppearance"],
         "Descriptor": ["ClusterRevision"],
         "Ethernet Network Diagnostics": [
             "PHYRate",
@@ -267,6 +269,18 @@
             "PacketUnicastTxCount",
             "CurrentMaxRate",
             "OverrunCount"
+        ],
+        "Channel": ["Lineup", "CurrentChannel"],
+        "Media Playback": ["SampledPosition"],
+        "Application Launcher": ["CurrentApp"],
+        "Application Basic": ["Application"],
+        "Time Synchronization": [
+            "TrustedTimeSource",
+            "DefaultNTP",
+            "TimeZone",
+            "DSTOffset",
+            "UTCTime",
+            "LocalTime"
         ]
     },
     "defaultReportingPolicy": "mandatory",

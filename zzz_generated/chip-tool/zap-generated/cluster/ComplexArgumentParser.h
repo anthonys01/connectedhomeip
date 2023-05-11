@@ -82,6 +82,11 @@ static CHIP_ERROR Setup(const char * label, chip::app::Clusters::BasicInformatio
 
 static void Finalize(chip::app::Clusters::BasicInformation::Structs::CapabilityMinimaStruct::Type & request);
 
+static CHIP_ERROR Setup(const char * label, chip::app::Clusters::BasicInformation::Structs::ProductAppearanceStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::BasicInformation::Structs::ProductAppearanceStruct::Type & request);
+
 static CHIP_ERROR Setup(const char * label,
                         chip::app::Clusters::OtaSoftwareUpdateRequestor::Structs::ProviderLocation::Type & request,
                         Json::Value & value);
@@ -162,10 +167,28 @@ static CHIP_ERROR Setup(const char * label, chip::app::Clusters::TimeSynchroniza
 
 static void Finalize(chip::app::Clusters::TimeSynchronization::Structs::DSTOffsetStruct::Type & request);
 
+static CHIP_ERROR Setup(const char * label,
+                        chip::app::Clusters::TimeSynchronization::Structs::FabricScopedTrustedTimeSourceStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::TimeSynchronization::Structs::FabricScopedTrustedTimeSourceStruct::Type & request);
+
 static CHIP_ERROR Setup(const char * label, chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type & request,
                         Json::Value & value);
 
 static void Finalize(chip::app::Clusters::TimeSynchronization::Structs::TimeZoneStruct::Type & request);
+
+static CHIP_ERROR Setup(const char * label,
+                        chip::app::Clusters::TimeSynchronization::Structs::TrustedTimeSourceStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::TimeSynchronization::Structs::TrustedTimeSourceStruct::Type & request);
+
+static CHIP_ERROR Setup(const char * label,
+                        chip::app::Clusters::BridgedDeviceBasicInformation::Structs::ProductAppearanceStruct::Type & request,
+                        Json::Value & value);
+
+static void Finalize(chip::app::Clusters::BridgedDeviceBasicInformation::Structs::ProductAppearanceStruct::Type & request);
 
 static CHIP_ERROR Setup(const char * label,
                         chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::Type & request,
@@ -279,10 +302,11 @@ static CHIP_ERROR Setup(const char * label, chip::app::Clusters::ApplicationLaun
 
 static void Finalize(chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEPStruct::Type & request);
 
-static CHIP_ERROR Setup(const char * label, chip::app::Clusters::ClientMonitoring::Structs::MonitoringRegistration::Type & request,
+static CHIP_ERROR Setup(const char * label,
+                        chip::app::Clusters::ClientMonitoring::Structs::MonitoringRegistrationStruct::Type & request,
                         Json::Value & value);
 
-static void Finalize(chip::app::Clusters::ClientMonitoring::Structs::MonitoringRegistration::Type & request);
+static void Finalize(chip::app::Clusters::ClientMonitoring::Structs::MonitoringRegistrationStruct::Type & request);
 
 static CHIP_ERROR Setup(const char * label, chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type & request,
                         Json::Value & value);
