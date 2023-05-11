@@ -739,23 +739,23 @@ OnOffEffect::~OnOffEffect()
  * Callbacks Implementation
  *********************************************************/
 
-bool emberAfOnOffClusterOffCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
-                                    const Commands::Off::DecodableType & commandData)
-{
-    return OnOffServer::Instance().offCommand(commandObj, commandPath);
-}
+//bool emberAfOnOffClusterOffCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+//                                    const Commands::Off::DecodableType & commandData)
+//{
+//    return OnOffServer::Instance().offCommand(commandObj, commandPath);
+//}
 
-bool emberAfOnOffClusterOnCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
-                                   const Commands::On::DecodableType & commandData)
-{
-    return OnOffServer::Instance().onCommand(commandObj, commandPath);
-}
+//bool emberAfOnOffClusterOnCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+//                                   const Commands::On::DecodableType & commandData)
+//{
+//    return OnOffServer::Instance().onCommand(commandObj, commandPath);
+//}
 
-bool emberAfOnOffClusterToggleCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
-                                       const Commands::Toggle::DecodableType & commandData)
-{
-    return OnOffServer::Instance().toggleCommand(commandObj, commandPath);
-}
+//bool emberAfOnOffClusterToggleCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
+//                                       const Commands::Toggle::DecodableType & commandData)
+//{
+//    return OnOffServer::Instance().toggleCommand(commandObj, commandPath);
+//}
 
 bool emberAfOnOffClusterOffWithEffectCallback(app::CommandHandler * commandObj, const app::ConcreteCommandPath & commandPath,
                                               const Commands::OffWithEffect::DecodableType & commandData)

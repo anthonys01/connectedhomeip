@@ -56,6 +56,7 @@
 #include "CommissionableInit.h"
 #include "Device.h"
 #include "main.h"
+//#include "mqtt_listener.h"
 #include <app/server/Server.h>
 
 #include <cassert>
@@ -963,6 +964,12 @@ void * bridge_polling_thread(void * context)
 
 int main(int argc, char * argv[])
 {
+    const std::string broker_uri = "tcp://localhost:1883";
+    const std::string client_id = "mqtt_listener";
+
+    //MqttListener listener(broker_uri, client_id);
+    //listener.start();
+
     // Clear out the device database
     memset(gDevices, 0, sizeof(gDevices));
 
@@ -1089,5 +1096,6 @@ int main(int argc, char * argv[])
     ApplicationInit();
     chip::DeviceLayer::PlatformMgr().RunEventLoop();
 
+    // listener.stop();
     return 0;
 }

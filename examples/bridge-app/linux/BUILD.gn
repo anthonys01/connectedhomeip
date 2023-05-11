@@ -18,29 +18,177 @@ import("${chip_root}/build/chip/tools.gni")
 
 assert(chip_build_tools)
 
-executable("chip-bridge-app") {
+# executable("chip-bridge-app") {
+#   sources = [
+#     "${chip_root}/examples/bridge-app/linux/bridged-actions-stub.cpp",
+#     "${chip_root}/examples/tv-app/tv-common/include/CHIPProjectAppConfig.h",
+#     "Device.cpp",
+#     "include/Device.h",
+#     #"paho-include/mqtt/async_client.h"
+#     #"include/mqtt_listener.h",
+#     "include/main.h",
+#     #"mqtt_listener.cpp",
+#     "main.cpp",
+#   ]
+# 
+#   deps = [
+#     "${chip_root}/examples/bridge-app/bridge-common",
+#     "${chip_root}/examples/platform/linux:app-main",
+#     "${chip_root}/src/lib",
+#     #"lib"
+#   ]
+# 
+#   # libs = ["lib/libpaho-mqttpp3.a"]
+# 
+#   cflags = [ "-Wconversion" ]
+# 
+#   include_dirs = [
+#      "include",
+#      #"paho-include"
+#     ]
+# 
+#   output_dir = root_out_dir
+# }
+
+executable("hager-bridge-app") {
   sources = [
     "${chip_root}/examples/bridge-app/linux/bridged-actions-stub.cpp",
     "${chip_root}/examples/tv-app/tv-common/include/CHIPProjectAppConfig.h",
-    "Device.cpp",
-    "include/Device.h",
-    "include/main.h",
-    "main.cpp",
+    "include/hager_device.h",
+    "hager_device.cpp",
+    "include/mqtt_listener.h",
+    "include/test.h",
+    "mqtt_listener.cpp",
+    "test.cpp",
   ]
 
   deps = [
     "${chip_root}/examples/bridge-app/bridge-common",
     "${chip_root}/examples/platform/linux:app-main",
     "${chip_root}/src/lib",
+    ":paho_mqttpp3",
+    ":simpleson"
+  ]
+
+  cflags_cc = [ "-Wconversion", "-Wno-shadow", "-w",
+   "-Wno-format-nonliteral", "-Wno-implicit-fallthrough" , "-Wno-return-type"  ]
+
+
+  configs += [
+    "${chip_root}/build/config/compiler:exceptions",
+    "${chip_root}/build/config/compiler:disabled_warnings",
+  ]
+
+  include_dirs = [
+     "include",
+    ]
+
+  output_dir = root_out_dir
+}
+
+static_library("simpleson") {
+  sources = [
+    "include/json.h",
+    "json.cpp",
+  ]
+
+  include_dirs = ["include"]
+  cflags_cc = [ "-Wconversion", "-Wno-shadow", "-w",
+   "-Wno-format-nonliteral", "-Wno-implicit-fallthrough", "-Wno-return-type" ]
+  configs += [
+    "${chip_root}/build/config/compiler:exceptions",
+    "${chip_root}/build/config/compiler:disabled_warnings",
+  ]
+}
+
+static_library("paho_mqttpp3") {
+  sources = [ ]
+  libs = [
+    "lib/libpaho-mqttpp3.a",
+    "lib/libpaho-mqtt3a.a"
+  ]
+  include_dirs = ["paho-include"]
+  configs += [
+    "${chip_root}/build/config/compiler:exceptions",
+  ]
+}
+
+
+executable("mqtt-test") {
+  sources = [
+    "include/mqtt_listener.h",
+    "mqtt_listener.cpp",
+    "mqtt_test.cpp"
+  ]
+
+  deps = [
+    ":paho_mqttpp3"
   ]
 
   cflags = [ "-Wconversion" ]
+  
+  configs += [
+    "${chip_root}/build/config/compiler:exceptions",
+  ]
 
-  include_dirs = [ "include" ]
+  include_dirs = [
+     "include"
+    ]
+
+  output_dir = root_out_dir
+}
+
+executable("mqtt-publisher-test") {
+  sources = [
+    "include/mqtt.h",
+    "include/mqtt_pal.h",
+    "include/mqtt.h",
+    "mqtt/mqtt.c",
+    "mqtt/mqtt_pal.c",
+    "mqtt/posix_sockets.h",
+    "mqtt/simple_publisher.c"
+  ]
+
+  deps = [
+  ]
+
+  cflags = [ "-Wconversion", "-Wno-sign-conversion" ]
+
+  include_dirs = [
+     "include",
+    ]
+
+  output_dir = root_out_dir
+}
+
+executable("mqtt-subscriber-test") {
+  sources = [
+    "include/mqtt.h",
+    "include/mqtt_pal.h",
+    "include/mqtt.h",
+    "mqtt/mqtt.c",
+    "mqtt/mqtt_pal.c",
+    "mqtt/posix_sockets.h",
+    "mqtt/simple_subscriber.c"
+  ]
+
+  deps = [
+  ]
+
+  cflags = [ "-Wconversion", "-Wno-sign-conversion" ]
+
+  include_dirs = [
+     "include",
+    ]
 
   output_dir = root_out_dir
 }
 
 group("linux") {
-  deps = [ ":chip-bridge-app" ]
+  deps = [
+     ":hager-bridge-app",
+     ":mqtt-publisher-test",
+     ":mqtt-subscriber-test",
+     ":mqtt-test"
+    ]
 }
